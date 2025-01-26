@@ -18,8 +18,8 @@ class Program
             var response = await client.GetAsync("https://icanhazdadjoke.com/");
             if (response.IsSuccessStatusCode)
             {
-                var jsonString = await response.Content.ReadAsStringAsync();
-                var jokeResponse = System.Text.Json.JsonSerializer.Deserialize<JokeResponse>(jsonString);
+                var jsonString = await response.Content.ReadAsStringAsync();    // This retrieves the joke as a JSON string.
+                var jokeResponse = System.Text.Json.JsonSerializer.Deserialize<JokeResponse>(jsonString);   // This deserializes the JSON string into a JokeResponse object, but it doesn't work yet because we haven't defined the JokeResponse class.
                 return jokeResponse.Joke;
             }
             else
