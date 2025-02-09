@@ -10,22 +10,20 @@ class Program
 
     static async Task<string> GetDadJokeAsync()
     {
-        using (var client = new HttpClient())
-        {
-            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.UserAgent.Add(new System.Net.Http.Headers.ProductInfoHeaderValue("DadJokeApp", "1.0"));
+        using var client = new HttpClient();
+        client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+        client.DefaultRequestHeaders.UserAgent.Add(new System.Net.Http.Headers.ProductInfoHeaderValue("DadJokeApp", "1.0"));
 
-            var response = await client.GetAsync("https://icanhazdadjoke.com/");
-            if (response.IsSuccessStatusCode)
-            {
-                var jsonString = await response.Content.ReadAsStringAsync();    // This retrieves the joke as a JSON string.
-                var jokeResponse = System.Text.Json.JsonSerializer.Deserialize<JokeResponse>(jsonString);   // This deserializes the JSON string into a JokeResponse object, but it doesn't work yet because we haven't defined the JokeResponse class.
-                return jokeResponse.Joke;
-            }
-            else
-            {
-                return "Failed to retrieve a joke.";
-            }
+        var response = await client.GetAsync("https://icanhazdadjoke.com/");
+        if (response.IsSuccessStatusCode)
+        {
+            var jsonString = await response.Content.ReadAsStringAsync();    // This retrieves the joke as a JSON string.
+            var jokeResponse = System.Text.Json.JsonSerializer.Deserialize<JokeResponse>(jsonString);   // This deserializes the JSON string into a JokeResponse object, but it doesn't work yet because we haven't defined the JokeResponse class.
+            return jokeResponse.Joke;
+        }
+        else
+        {
+            return "Failed to retrieve a joke.";
         }
     }
 }
