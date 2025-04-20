@@ -1,5 +1,7 @@
 # DadJoke
 
+[![Build DadJoke on Main](https://github.com/rfalanga/DadJoke/actions/workflows/dotnet.yml/badge.svg)](https://github.com/rfalanga/DadJoke/actions/workflows/dotnet.yml)
+
 This simple app is just for fun. :smile:
 
 ## Features
